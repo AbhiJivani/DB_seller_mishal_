@@ -27,6 +27,8 @@ import androidx.fragment.app.FragmentTransaction;
 import DataBase.Instence_class;
 import DataBase.Model_Class;
 import DataBase.PModel;
+
+import com.bumptech.glide.Glide;
 import com.example.db_seller.R;
 import com.example.db_seller.Splash_Screen;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -34,6 +36,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 
+import DataBase.TransferDataFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,6 +61,20 @@ public class Add_Product_Fragment extends Fragment
        fprice=view.findViewById(R.id.pricefield);
        fcategory=view.findViewById(R.id.categoryfield);
        submitbutton = view.findViewById(R.id.submitbutton);
+
+       if(getArguments()!=null) {
+
+            fname.setText("" + getArguments().getString("name"));
+            fstock.setText("" + getArguments().getString("stock"));
+            fprice.setText("" + getArguments().getString("price"));
+            fcategory.setText("" + getArguments().getString("category"));
+            Glide.with(Add_Product_Fragment.this)
+                    .load("https://dipkakadiya.000webhostapp.com/MySite/" + getArguments().getString("img"))
+                    .into(imageView);
+           Log.d("NNN", "onCreateView: Name="+getArguments().getString("name"));
+        }
+        //Log.d("TTT", "getDataFromFragment: fName="+name);
+
 
        imageView.setOnClickListener(new View.OnClickListener() {
            @Override

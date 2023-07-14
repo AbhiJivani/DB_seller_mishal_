@@ -1,10 +1,8 @@
 package com.example.db_seller;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +24,7 @@ import java.util.List;
 import DataBase.Instence_class;
 import DataBase.Model_Class;
 import DataBase.Productdatum;
+import DataBase.TransferDataFragment;
 import fragments.Add_Product_Fragment;
 import fragments.Inventory_Fragment;
 import retrofit2.Call;
@@ -35,10 +34,12 @@ import retrofit2.Response;
 public class ViewProAdapter extends RecyclerView.Adapter<ViewProAdapter.ProHolder> {
     Inventory_Fragment inventory_fragment;
     List<Productdatum> productdata;
+    TransferDataFragment transferDataFragment;
 
-    public ViewProAdapter(Inventory_Fragment inventory_fragment, List<Productdatum> productdata) {
+    public ViewProAdapter(Inventory_Fragment inventory_fragment, List<Productdatum> productdata, TransferDataFragment transferDataFragment) {
         this.inventory_fragment = inventory_fragment;
         this.productdata=productdata;
+        this.transferDataFragment = transferDataFragment;
     }
 
     @NonNull
@@ -70,20 +71,23 @@ public class ViewProAdapter extends RecyclerView.Adapter<ViewProAdapter.ProHolde
 
                         if(item.getItemId()==R.id.updatemenu){
                             Add_Product_Fragment apf = new Add_Product_Fragment();
-                            Bundle args = new Bundle();
 
-                            Splash_Screen.editor.putString("from","update");
-                            Splash_Screen.editor.commit();
+//                            Splash_Screen.editor.putString("from","update");
+//                            Splash_Screen.editor.commit();
+//
+//                            Splash_Screen.editor.putString("pid",""+productdata.get(position).getId());
+//                            Splash_Screen.editor.putString("pname",""+productdata.get(position).getName());
+//                            Splash_Screen.editor.putString("pprice",""+productdata.get(position).getPrice());
+//                            Splash_Screen.editor.putString("pstock",""+productdata.get(position).getStock());
+//                            Splash_Screen.editor.putString("pcategory",""+productdata.get(position).getCategory());
+//                            Splash_Screen.editor.putString("pimage",""+productdata.get(position).getImage());
 
-                            Splash_Screen.editor.putString("pid",""+productdata.get(position).getId());
-                            Splash_Screen.editor.putString("pname",""+productdata.get(position).getName());
-                            Splash_Screen.editor.putString("pprice",""+productdata.get(position).getPrice());
-                            Splash_Screen.editor.putString("pstock",""+productdata.get(position).getStock());
-                            Splash_Screen.editor.putString("pcategory",""+productdata.get(position).getCategory());
-                            Splash_Screen.editor.putString("pimage",""+productdata.get(position).getImage());
-
-                            apf.setArguments(args);
-                            addfragment(new Add_Product_Fragment());
+                            transferDataFragment.getDataFromFragment(Integer.parseInt(productdata.get(position).getId()),
+                                    productdata.get(position).getName(),
+                                    productdata.get(position).getPrice(),
+                                    productdata.get(position).getStock(),
+                                    productdata.get(position).getCategory(),
+                                    productdata.get(position).getImage());
                         }
                         if(item.getItemId()==R.id.deletemenu){
 
