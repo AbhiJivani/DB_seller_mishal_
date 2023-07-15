@@ -29,8 +29,12 @@ import DataBase.Model_Class;
 import DataBase.PModel;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.db_seller.R;
 import com.example.db_seller.Splash_Screen;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.ByteArrayOutputStream;
@@ -68,9 +72,27 @@ public class Add_Product_Fragment extends Fragment
             fstock.setText("" + getArguments().getString("stock"));
             fprice.setText("" + getArguments().getString("price"));
             fcategory.setText("" + getArguments().getString("category"));
-            Glide.with(Add_Product_Fragment.this)
-                    .load("https://dipkakadiya.000webhostapp.com/MySite/" + getArguments().getString("img"))
-                    .into(imageView);
+//            Glide.with(Add_Product_Fragment.this)
+//                    .load("https://dipkakadiya.000webhostapp.com/MySite/" + getArguments().getString("img"))
+//                    .into(imageView);
+
+//           Glide.with(Add_Product_Fragment.this)
+//                   .load(Uri.parse("https://dipkakadiya.000webhostapp.com/MySite/" + getArguments().getString("img"))
+//                   .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                   .skipMemoryCache(true)
+//                   .into(imageView);
+           Glide.with(getContext())
+                   .load("https://dipkakadiya.000webhostapp.com/MySite/" + getArguments().getString("img"))
+                   .diskCacheStrategy(DiskCacheStrategy.NONE)
+                   .skipMemoryCache(true)
+                   .into(imageView);
+
+//           Picasso.with(getContext())
+//                   .load("https://dipkakadiya.000webhostapp.com/MySite/" + getArguments().getString("img"))
+//                   .networkPolicy(NetworkPolicy.NO_CACHE)
+//                   .memoryPolicy(MemoryPolicy.NO_CACHE)
+//                   .into(imageView);
+
            Log.d("NNN", "onCreateView: Name="+getArguments().getString("name"));
         }
         //Log.d("TTT", "getDataFromFragment: fName="+name);

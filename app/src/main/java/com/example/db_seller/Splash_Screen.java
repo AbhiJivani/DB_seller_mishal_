@@ -24,13 +24,13 @@ public class Splash_Screen extends AppCompatActivity
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-        imageView = findViewById(R.id.splashimg);
+       // imageView = findViewById(R.id.splashimg);
 
         preferences = getSharedPreferences("mypref",MODE_PRIVATE);
         editor= preferences.edit();
 
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.splash_anim);
-        imageView.setAnimation(animation);
+//        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.splash_anim);
+//        imageView.setAnimation(animation);
 
         int login = preferences.getInt("login", 0);
 
@@ -44,7 +44,7 @@ public class Splash_Screen extends AppCompatActivity
                 }
             };
             Handler handler = new Handler();
-            handler.postDelayed(runnable, 1500);
+            handler.postDelayed(runnable, 5500);
         }
         if(login==0) {
             runnable = new Runnable() {
@@ -56,7 +56,7 @@ public class Splash_Screen extends AppCompatActivity
                 }
             };
             Handler handler = new Handler();
-            handler.postDelayed(runnable, 1500);
+            handler.postDelayed(runnable, 5500);
         }
     }
 }
